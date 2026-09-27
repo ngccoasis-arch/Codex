@@ -1,0 +1,34 @@
+# Core requirements and interaction decisions
+
+## Scope
+
+The app speaks text that the user posts in its own composer. It displays that original text while reading. It is a read-aloud tool, with no analysis, summary, translation, correction, chatbot response, or content generation.
+
+### Must have for the first usable version
+
+| Area | Behavior | Acceptance check |
+| --- | --- | --- |
+| Input | Accept pasted or typed Unicode text, including English, Chinese, Malay, punctuation, and line breaks. | Posting nonempty text displays the same text and starts speech; blank/whitespace-only input does not start speech. |
+| Playback | Read the submitted text with a device/platform speech engine. | Play/replay, pause/resume where supported, and stop work; finished/error/cancelled states are visible. |
+| Voice | List voices exposed by the installed speech engine with readable name and language; default to the system voice. | A selected available voice is used for the next reading; if it disappears, revert to the system default and inform the user. |
+| Speed | Start at 1.0×; offer 0.75×, 1.0×, 1.25×, 1.5×, 2.0× within the engine's supported range. | A selected speed affects the next reading; unsupported values are disabled or clamped visibly. |
+| New post | Keep only one active reading. | Posting new text cancels the current utterance before reading the new one. |
+| Privacy | Keep text and settings locally in the first version. | No account, analytics payload, cloud TTS, or text upload is needed to read. |
+| Accessibility | Label the input, voice, speed, and playback controls; show status in text. | Controls work with keyboard/touch and an assistive reader; playing state is distinguishable without sound. |
+
+### Voice and speed details
+
+- Show only voices the device/platform reports as available; voice inventory and language quality vary by device and installation.
+- Store a stable voice identifier when the engine provides one; retain the system default as a fallback.
+- A voice change during playback takes effect on replay or the next post, avoiding a surprising restart mid-sentence.
+- Speed is a playback multiplier, not a rewrite of text. The selected speed likewise takes effect on replay or the next post.
+- Use the posted text's original characters for speech. Platform TTS may pronounce punctuation and mixed languages differently; test English, Chinese, Malay, and mixed-script samples on the chosen target.
+- If the platform cannot truly pause/resume, do not label stop/restart as pause/resume. Surface only controls the implementation supports.
+
+### Constraints and later ideas
+
+The first version has one active post and no saved chat history. Offline reading is desirable where an installed voice supports it, but available voices may require downloads or network access; expose that limitation honestly. Sharing text from another app, background playback, file import, voice downloads, audio export, and synchronization can be evaluated after the basic reading flow works.
+
+## Open implementation decision
+
+Choose the target platform before adding platform-specific `src/` and `tests/`: Android native for a device-installed app, or a browser app for a quick cross-device prototype. Both must meet the same user flow and content boundary above.
