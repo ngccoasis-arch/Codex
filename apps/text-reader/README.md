@@ -2,9 +2,13 @@
 
 A planned Android app for posting text and hearing it read aloud in a chosen voice at a chosen speed.
 
+## Juniper and the app decision
+
+The requested voice is **Juniper in ChatGPT**, selected under **ChatGPT Settings → Voice → Voice**. POCO's Google text-to-speech settings do not select ChatGPT voices. ChatGPT's documented Juniper choice is for Voice conversations; OpenAI does not document a Juniper selector for the Android message action **Read aloud**. Before building an Android app, confirm whether ChatGPT Voice with Juniper meets the need. A standalone app using Android `TextToSpeech` cannot offer that exact ChatGPT voice, and Juniper is not listed among the public Speech API voices. This project is paused at documentation until a supported voice path and the remaining gap are clear. See [ChatGPT Voice](https://help.openai.com/en/articles/20001274-chatgpt-voice), [ChatGPT Android actions](https://help.openai.com/en/articles/8142208-chatgpt-android-app-faq), and [Speech API voices](https://developers.openai.com/api/docs/guides/text-to-speech).
+
 ## Try the phone's reader first
 
-On POCO/HyperOS, open **Settings → Additional settings → Languages & input → Text-to-speech output**. Select the preferred engine and open its settings to inspect available voices; adjust language and speech rate, play the sample, and then try the selected-text **Read aloud** action again. Menu names may vary by software version. If that provides the desired voice and speed, a separate app may add little value. If it does not, record which voice/control is missing before implementing the app. See [Xiaomi's settings path](https://www.mi.com/my/support/article/KA-06461/) and [Android's TTS settings guide](https://support.google.com/accessibility/android/answer/6006983).
+On POCO/HyperOS, open **Settings → Additional settings → Languages & input → Text-to-speech output**. Select the preferred engine and open its settings to inspect available voices; adjust language and speech rate, play the sample, and then try the selected-text **Read aloud** action again. Menu names may vary by software version. This only checks the phone's own voices, not Juniper. If that provides an acceptable alternative voice and speed, a separate app may add little value. If it does not, record which voice/control is missing before implementing the app. See [Xiaomi's settings path](https://www.mi.com/my/support/article/KA-06461/) and [Android's TTS settings guide](https://support.google.com/accessibility/android/answer/6006983).
 
 ## First user flow
 
