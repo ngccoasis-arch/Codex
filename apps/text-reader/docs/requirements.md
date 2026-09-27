@@ -2,6 +2,8 @@
 
 ## Scope
 
+**Voice constraint discovered:** The user wants ChatGPT's Juniper voice. ChatGPT Voice lists Juniper, but Android's installed TTS voices and the public Speech API do not expose it as a selectable voice for a separate app. The Android prototype described below would therefore use an alternative voice, subject to the user's choice. Do not present it as a Juniper implementation. ChatGPT's Android **Read aloud** action is documented, but a Juniper selector for that action is not documented.
+
 The app speaks text that the user posts in its own composer. It displays that original text while reading. It is a read-aloud tool, with no analysis, summary, translation, correction, chatbot response, or content generation.
 
 ### Must have for the first usable version
